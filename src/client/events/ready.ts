@@ -1,7 +1,7 @@
 import fs from "fs"
 
 import { Client } from "../index"
-import { bot } from "../settings"
+import { bot } from "../helpers/config.helper"
 
 import { ActivityType } from "discord.js"
 import { IEvent } from "../interfaces/event/index"

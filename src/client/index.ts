@@ -2,7 +2,7 @@ import * as discord from "discord.js"
 
 import handleCommands from "./handlers/commands"
 import handleEvents from "./handlers/events"
-import { bot } from "./settings"
+import { bot } from "./helpers/config.helper"
 
 import ICommand from "./interfaces/command/index"
 
@@ -22,11 +22,11 @@ function createClient() {
             discord.GatewayIntentBits.GuildMessages,
             discord.GatewayIntentBits.GuildMessageReactions
         ],
-        partials: [ discord.Partials.Channel ]
+        partials: [discord.Partials.Channel]
     })
 
     client.commands = new discord.Collection()
-    
+
     async function useEventsHandler() {
         await handleEvents(client)
     }
@@ -42,15 +42,15 @@ function createClient() {
 
         guilds.forEach(async (guild) => {
             const commands = await guild.commands.fetch()
-                for (const command of commands.values()) {
-                    await command.delete()
-                }
+            for (const command of commands.values()) {
+                await command.delete()
+            }
         })
     }
 
     async function start() {
         console.log("> [client] Starting...")
-        
+
         await deleteCommands()
         await useEventsHandler()
         await useCommandsHandler()
@@ -73,7 +73,7 @@ function createClient() {
         stop()
         await start()
     }
- 
+
     return { start, stop, restart }
 }
 

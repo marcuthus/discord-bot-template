@@ -1,4 +1,4 @@
-import { bot } from "../../settings"
+import { bot } from "../../helpers/config.helper"
 
 function extractCommandAndOptions(messageContent: string) {
     if (!messageContent) return { command: "", options: [] }

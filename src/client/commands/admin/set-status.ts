@@ -1,6 +1,6 @@
 import * as discord from "discord.js"
 
-import { bot } from "../../settings"
+import { bot } from "../../helpers/config.helper"
 
 import ICommand from "../../interfaces/command"
 import { isBotOwerId } from "../../utils/command/tools"
@@ -83,7 +83,7 @@ export const command: ICommand = {
             `)
             .setColor(embedStautsColor[newStatus] as discord.ColorResolvable)
 
-        interaction.reply({ embeds: [ statusEmbed ], ephemeral: true })
+        interaction.reply({ embeds: [statusEmbed], ephemeral: true })
 
         client.user.setStatus(newStatus)
         client.user.setPresence({
