@@ -6,7 +6,7 @@ function read(filePath: string) {
     return data
 }
 
-function write(filePath: string, data: any) {
+function write(filePath: string, data: unknown) {
     const dataString = JSON.stringify(data)
     fs.writeFileSync(filePath, dataString)
 }

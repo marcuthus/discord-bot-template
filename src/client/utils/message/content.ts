@@ -17,9 +17,7 @@ function extractCommandAndOptions(messageContent: string) {
     }
 
     function parseOptions(options: string[]) {
-        options = options
-            .map(option => option.trim())
-            .filter(option => option !== "")
+        options = options.map((option) => option.trim()).filter((option) => option !== "")
 
         return options
     }

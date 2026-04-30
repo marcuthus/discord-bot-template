@@ -1,18 +1,21 @@
 import * as discord from "discord.js"
 
+import { createScopedLogger } from "../utils/logger"
+
+import { configHelper } from "./helpers/config.helper"
+import { Command } from "./interfaces/command/index"
 import handleCommands from "./handlers/commands"
 import handleEvents from "./handlers/events"
-import { bot } from "./helpers/config.helper"
 
-import ICommand from "./interfaces/command/index"
+const logger = createScopedLogger("client")
 
 export class Client extends discord.Client {
-    public commands: discord.Collection<string, ICommand> = new discord.Collection()
+    public commands: discord.Collection<string, Command> = new discord.Collection()
     public slashCommands: discord.ApplicationCommandDataResolvable[] = []
 }
 
 function createClient() {
-    const token = bot.token
+    const token = configHelper.token
 
     const client = new Client({
         intents: [
@@ -36,7 +39,7 @@ function createClient() {
     }
 
     async function deleteCommands() {
-        console.log("> [client] Deleting all commands.")
+        logger.info("Deleting all commands.")
 
         const guilds = client.guilds.cache
 
@@ -49,24 +52,24 @@ function createClient() {
     }
 
     async function start() {
-        console.log("> [client] Starting...")
+        logger.info("Starting...")
 
         await deleteCommands()
         await useEventsHandler()
         await useCommandsHandler()
         await client.login(token)
 
-        return await new Promise((resolve, reject) => {
+        return await new Promise((resolve) => {
             client.on("ready", () => resolve(null))
         })
     }
 
     function stop() {
-        console.log("> [client] Stoping...")
+        logger.info("Stoping...")
 
         client.destroy()
 
-        console.log("> [client] Successfully stopped!")
+        logger.info("Successfully stopped!")
     }
 
     async function restart() {

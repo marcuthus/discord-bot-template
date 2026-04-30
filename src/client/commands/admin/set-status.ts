@@ -1,11 +1,7 @@
 import * as discord from "discord.js"
 
-import { bot } from "../../helpers/config.helper"
-
-import ICommand from "../../interfaces/command"
 import { isBotOwerId } from "../../utils/command/tools"
-
-const adminId = bot.admin.id
+import { Command } from "../../interfaces/command"
 
 const embedStautsColor = {
     idle: "Purple",
@@ -20,10 +16,10 @@ const embedStautsEmoji = {
     idle: "🌙",
     online: "🟢",
     invisible: "⚫",
-    dnd: "🔴",
+    dnd: "🔴"
 }
 
-export const command: ICommand = {
+export const command: Command = {
     name: "set-status",
     description: "Define um novo status e descrição para o bot.",
     options: [
@@ -35,21 +31,21 @@ export const command: ICommand = {
             choices: [
                 {
                     name: "Online",
-                    value: discord.PresenceUpdateStatus.Online,
+                    value: discord.PresenceUpdateStatus.Online
                 },
                 {
                     name: "Ausente",
-                    value: discord.PresenceUpdateStatus.Idle,
+                    value: discord.PresenceUpdateStatus.Idle
                 },
                 {
                     name: "Não perturbar",
-                    value: discord.PresenceUpdateStatus.DoNotDisturb,
+                    value: discord.PresenceUpdateStatus.DoNotDisturb
                 },
                 {
                     name: "Invisível",
-                    value: discord.PresenceUpdateStatus.Invisible,
-                },
-            ],
+                    value: discord.PresenceUpdateStatus.Invisible
+                }
+            ]
         },
         {
             name: "new-description",
@@ -63,7 +59,9 @@ export const command: ICommand = {
         const client = interaction.client
 
         if (!isBotOwerId(interaction.user.id)) {
-            return interaction.reply(`\`\`\`Permission Error:\n${interaction.user.username}, você não possui permissão para usar este comando.\`\`\``)
+            return interaction.reply(
+                `\`\`\`Permission Error:\n${interaction.user.username}, você não possui permissão para usar este comando.\`\`\``
+            )
         }
 
         const botAvatarUrl = client.user.displayAvatarURL()
@@ -74,22 +72,23 @@ export const command: ICommand = {
         const statusEmbed = new discord.EmbedBuilder()
             .setAuthor({ name: client.user.username, iconURL: botAvatarUrl })
             .setTitle("Novo status e descrição aplicados!")
-            .setDescription(`
+            .setDescription(
+                `
                 ⎜
                 ⎜➦ ${embedStautsEmoji[newStatus]} Novo Status: \`${newStatus}\`
                 ⎜
                 ⎜➦ 📋 Nova Descrição: \`${newDescription}\`
                 ⎜
-            `)
+            `
+            )
             .setColor(embedStautsColor[newStatus] as discord.ColorResolvable)
 
         interaction.reply({ embeds: [statusEmbed], ephemeral: true })
 
         client.user.setStatus(newStatus)
+
         client.user.setPresence({
-            activities: [
-                { name: newDescription }
-            ]
+            activities: [{ name: newDescription }]
         })
     }
 }

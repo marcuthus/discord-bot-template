@@ -1,8 +1,8 @@
-import discord from "discord.js"
+import * as discord from "discord.js"
 
-interface IRegisterCommandOptions {
-    guildId: string;
+interface RegisterCommandOptions {
+    guildId: string
     commands: discord.ApplicationCommandDataResolvable[]
 }
 
-export { IRegisterCommandOptions }
+export { RegisterCommandOptions }

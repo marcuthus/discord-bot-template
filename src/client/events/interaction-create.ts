@@ -1,12 +1,14 @@
+import { ExtendedInteraction } from "../interfaces/command"
+import { createScopedLogger } from "../../utils/logger"
+import { Event } from "../interfaces/event"
 import { Client } from "../index"
 
-import { IExtendedInteraction } from "../interfaces/command"
-import IEvent from "../interfaces/event"
+const logger = createScopedLogger("client")
 
-export const event: IEvent = {
+export const event: Event = {
     name: "interactionCreate",
     type: "on",
-    run: async (interaction: IExtendedInteraction) => {
+    run: async (interaction: ExtendedInteraction) => {
         if (interaction.isChatInputCommand()) {
             const client = interaction.client as Client
             const command = client.commands.get(interaction.commandName)
@@ -16,12 +18,14 @@ export const event: IEvent = {
             }
 
             try {
-                console.log(`> [client] Running the command '${interaction.commandName}'.`)
+                logger.info(`Running the command '${interaction.commandName}'.`)
                 command.run(interaction)
-            } catch(error) {
-                console.error(error)
+            } catch (error) {
+                logger.error(error)
 
-                await interaction.reply({ content: `Ocorreu um erro ao tentar extecutar o comando \`${command.name}\`!` })
+                await interaction.reply({
+                    content: `Ocorreu um erro ao tentar extecutar o comando \`${command.name}\`!`
+                })
             }
         }
     }
