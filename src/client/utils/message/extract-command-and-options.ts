@@ -1,12 +1,12 @@
-import { bot } from "../../helpers/config.helper"
+import { configHelper } from "../../helpers/config.helper"
 
-function extractCommandAndOptions(messageContent: string) {
+export function extractCommandAndOptions(messageContent: string) {
     if (!messageContent) return { command: "", options: [] }
 
     let [command, ...options] = messageContent
-        .slice(bot.commands.prefix.length)
+        .slice(configHelper.commands.prefix.length)
         .trim()
-        .split(bot.commands.optionsSeparator)
+        .split(configHelper.commands.argumentsSeparator)
 
     command = command.toLocaleLowerCase()
     options = parseOptions(options)
@@ -22,5 +22,3 @@ function extractCommandAndOptions(messageContent: string) {
         return options
     }
 }
-
-export { extractCommandAndOptions }

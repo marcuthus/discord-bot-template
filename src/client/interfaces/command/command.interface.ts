@@ -4,7 +4,7 @@ export interface ExtendedInteraction extends discord.CommandInteraction {
     member: discord.GuildMember
 }
 
-type RunFunc = (interaction: ExtendedInteraction) => Promise<any>
+type RunFunc = (interaction: ExtendedInteraction) => Promise<void>
 
 export interface Command extends discord.ChatInputApplicationCommandData {
     name: string

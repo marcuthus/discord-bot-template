@@ -14,7 +14,8 @@ export const event: Event = {
             const command = client.commands.get(interaction.commandName)
 
             if (!command) {
-                return await interaction.reply(`O commando \`/${interaction.commandName}\` não existe!`)
+                await interaction.reply(`O commando \`/${interaction.commandName}\` não existe!`)
+                return
             }
 
             try {

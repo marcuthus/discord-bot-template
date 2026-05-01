@@ -14,11 +14,12 @@ export const event: Event = {
 
         const totalOfGuilds = client.guilds.cache.size
 
-        let totalOfMembers: number = 0
-        totalOfMembers = guildsCache.reduce((_, guild) => totalOfMembers + guild.memberCount)
+        const totalOfMembers = guildsCache.reduce((acc, guild) => acc + guild.memberCount, 0)
 
         logger.info(`I'm on '${totalOfGuilds}' servers with '${totalOfMembers}' total members!`)
 
         await client.application?.commands.set(client.slashCommands)
+
+        logger.info("All slash commands synchronized with Discord!")
     }
 }

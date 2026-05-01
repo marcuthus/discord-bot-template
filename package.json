@@ -1,37 +1,38 @@
 {
-  "name": "discord-bot-template",
-  "version": "0.1.0",
-  "description": "",
-  "main": "./dist/index.js",
-  "scripts": {
-    "dev": "ts-node ./src/index.ts",
-    "dev:reload": "nodemon ./src/index.ts",
-    "build": "tsc --declaration",
-    "start": "node ./dist/index.js",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
-  },
-  "keywords": [],
-  "author": "Marcuth",
-  "license": "MIT",
-  "dependencies": {
-    "@marcuth/env": "^0.0.1",
-    "discord.js": "^14.7.1",
-    "winston": "^3.19.0"
-  },
-  "devDependencies": {
-    "@types/node": "^25.6.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.1",
-    "@typescript-eslint/parser": "^8.59.1",
-    "eslint": "^9.39.4",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-perfectionist": "^5.9.0",
-    "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-unused-imports": "^4.4.1",
-    "nodemon": "^2.0.20",
-    "prettier": "^3.8.3",
-    "ts-node": "^10.9.1",
-    "typescript-eslint": "^8.59.1"
-  }
+    "name": "discord-bot-template",
+    "version": "0.1.0",
+    "description": "",
+    "main": "./dist/index.js",
+    "scripts": {
+        "dev": "ts-node ./src/index.ts",
+        "dev:reload": "nodemon ./src/index.ts",
+        "build": "tsc --declaration",
+        "start": "node ./dist/index.js",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier . --write"
+    },
+    "keywords": [],
+    "author": "Marcuth",
+    "license": "MIT",
+    "dependencies": {
+        "@marcuth/env": "^0.0.1",
+        "discord.js": "^14.7.1",
+        "winston": "^3.19.0"
+    },
+    "devDependencies": {
+        "@types/node": "^25.6.0",
+        "@typescript-eslint/eslint-plugin": "^8.59.1",
+        "@typescript-eslint/parser": "^8.59.1",
+        "eslint": "^9.39.4",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-perfectionist": "^5.9.0",
+        "eslint-plugin-prettier": "^5.5.5",
+        "eslint-plugin-unused-imports": "^4.4.1",
+        "nodemon": "^2.0.20",
+        "prettier": "^3.8.3",
+        "ts-node": "^10.9.1",
+        "typescript-eslint": "^8.59.1"
+    }
 }

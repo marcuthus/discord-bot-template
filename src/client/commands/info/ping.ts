@@ -8,16 +8,46 @@ export const command: Command = {
     type: discord.ApplicationCommandType.ChatInput,
     run: async (interaction) => {
         const client = interaction.client
-        const ping = client.ws.ping
         const botAvatarUrl = client.user.displayAvatarURL()
 
-        const pingEmbed = new discord.EmbedBuilder()
-            .setAuthor({ name: client.user.username, iconURL: "https://avatars.githubusercontent.com/u/91915075?v=4" })
-            .setTitle("Bot's Ping")
-            .setDescription(`Olá ${interaction.user}, meu ping está em \`${ping}\` ms`)
-            .setColor("Random")
-            .setThumbnail(botAvatarUrl)
+        const sent = await interaction.reply({
+            content: "Calculando ping...",
+            fetchReply: true
+        })
 
-        interaction.reply({ embeds: [pingEmbed], ephemeral: true })
+        const messageLatency = sent.createdTimestamp - interaction.createdTimestamp
+        const apiLatency = client.ws.ping
+
+        const pingEmbed = new discord.EmbedBuilder()
+            .setTitle("🏓 Pong!")
+            .setDescription(`Olá ${interaction.user}, aqui estão os meus resultados:`)
+            .addFields(
+                {
+                    name: "📡 Latência da API",
+                    value: `\`${apiLatency}ms\``,
+                    inline: true
+                },
+                {
+                    name: "✉️ Latência de Mensagem",
+                    value: `\`${messageLatency}ms\``,
+                    inline: true
+                }
+            )
+            .setColor("Blue")
+            .setThumbnail(botAvatarUrl)
+            .setFooter({
+                text: `Solicitado por ${interaction.user.tag}`,
+                iconURL: interaction.user.displayAvatarURL()
+            })
+            .setTimestamp()
+            .setFooter({
+                text: "By Marcuth",
+                iconURL: "https://avatars.githubusercontent.com/u/91915075?v=4"
+            })
+
+        await interaction.editReply({
+            content: null,
+            embeds: [pingEmbed]
+        })
     }
 }

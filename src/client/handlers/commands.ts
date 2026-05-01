@@ -13,44 +13,41 @@ export default async (client: Client) => {
     const commandsDirPath = path.join(__dirname, "../commands")
     const fileExtension = path.extname(__filename)
 
-    fs.readdirSync(commandsDirPath)
+    const commandDirs = fs
+        .readdirSync(commandsDirPath)
         .filter((dir) => fs.lstatSync(path.join(commandsDirPath, dir)).isDirectory())
-        .forEach((dir) => {
-            const subFolder = path.join(commandsDirPath, dir)
 
-            fs.readdirSync(subFolder)
-                .filter((file) => file.endsWith(fileExtension))
-                .forEach(async (file) => {
-                    const commandFilePath = path.join(subFolder, file)
-                    const command = await importCommand(commandFilePath)
+    for (const dir of commandDirs) {
+        const subFolder = path.join(commandsDirPath, dir)
+        const commandFiles = fs.readdirSync(subFolder).filter((file) => file.endsWith(fileExtension))
 
-                    if (!command.name) {
-                        logger.error(`Not valid commmand name on: ${commandFilePath}`)
-                        throw new Error(`Not valid commmand name on: ${commandFilePath}`)
-                    }
+        for (const file of commandFiles) {
+            const commandFilePath = path.join(subFolder, file)
+            const command = await importCommand(commandFilePath)
 
-                    if (!command.run) {
-                        logger.error(`Not valid command run on: ${commandFilePath}`)
-                        throw new Error(`Not valid command run on: ${commandFilePath}`)
-                    }
+            if (!command.name) {
+                logger.error(`Not valid command name on: ${commandFilePath}`)
+                throw new Error(`Not valid command name on: ${commandFilePath}`)
+            }
 
-                    loadCommand(command)
+            if (!command.run) {
+                logger.error(`Not valid command run on: ${commandFilePath}`)
+                throw new Error(`Not valid command run on: ${commandFilePath}`)
+            }
 
-                    function loadCommand(command: Command) {
-                        const commandData: discord.ApplicationCommandDataResolvable = {
-                            name: command.name,
-                            description: command.description,
-                            type: command.type,
-                            options: command.options
-                        }
+            const commandData: discord.ApplicationCommandDataResolvable = {
+                name: command.name,
+                description: command.description,
+                type: command.type,
+                options: command.options
+            }
 
-                        client.commands.set(command.name, command)
-                        client.slashCommands.push(commandData)
+            client.commands.set(command.name, command)
+            client.slashCommands.push(commandData)
 
-                        logger.info(`The command '${command.name}' loaded.`)
-                    }
-                })
-        })
+            logger.info(`The command '${command.name}' loaded.`)
+        }
+    }
 
     async function importCommand(commandFilePath: string) {
         const command: Command = (await import(commandFilePath)).command

@@ -3,21 +3,25 @@
 ## Build/Lint/Test Commands
 
 ### Development
+
 - `npm run dev` - Run bot in development mode with ts-node
 - `npm run dev:reload` - Run with nodemon for auto-reload
 - `npm run build` - Compile TypeScript to JavaScript (outputs to `./dist/`)
 - `npm start` - Run compiled bot from `./dist/`
 
 ### Linting
+
 - `npm run lint` - Run ESLint to check code quality
 - `npm run lint:fix` - Run ESLint with auto-fix
 
 ### Testing
+
 - No test framework is currently configured in this project
 - To add tests, consider jest, vitest, or similar frameworks
 - Example test command (once configured): `npm test` or `npm test -- path/to/file.test.ts`
 
 ### Type Checking
+
 - `npx tsc --noEmit` - Run TypeScript compiler for type checking without emitting files
 
 ## Code Style Guidelines
@@ -25,6 +29,7 @@
 ### Imports
 
 **Import Order (enforced by eslint-plugin-perfectionist):**
+
 1. Node.js builtin modules (`path`, `fs`) - use `node:` prefix (e.g., `node:path`, `node:fs`)
 2. External packages (`discord.js`, `winston`)
 3. Internal modules (absolute imports from `src/`)
@@ -33,6 +38,7 @@
 6. Index/file imports
 
 **Import Format:**
+
 ```typescript
 import path from "node:path"
 import fs from "node:fs"
@@ -113,16 +119,19 @@ try {
 ### Discord Bot Patterns
 
 **Commands Structure:**
+
 - Place commands in `src/client/commands/<category>/<command-name>.ts`
 - Export a `command` object with `name`, `description`, `type`, and `run` function
 - Use `discord.ApplicationCommandType.ChatInput` for slash commands
 
 **Events Structure:**
+
 - Place events in `src/client/events/<event-name>.ts`
 - Export an `event` object with `name`, `type` (`"on"`, `"once"`, `"off"`), and `run` function
 - Event types defined in `src/enums/event-type.enum.ts`
 
 **Client Pattern:**
+
 - Use factory function `createClient()` instead of direct instantiation
 - Client class extends `discord.Client` with custom properties (`commands`, `slashCommands`)
 - Handlers in `src/client/handlers/` automatically load commands and events

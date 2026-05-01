@@ -38,23 +38,9 @@ function createClient() {
         await handleCommands(client)
     }
 
-    async function deleteCommands() {
-        logger.info("Deleting all commands.")
-
-        const guilds = client.guilds.cache
-
-        guilds.forEach(async (guild) => {
-            const commands = await guild.commands.fetch()
-            for (const command of commands.values()) {
-                await command.delete()
-            }
-        })
-    }
-
     async function start() {
         logger.info("Starting...")
 
-        await deleteCommands()
         await useEventsHandler()
         await useCommandsHandler()
         await client.login(token)

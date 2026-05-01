@@ -1,6 +1,6 @@
 import * as discord from "discord.js"
 
-import { isBotOwerId } from "../../utils/command/tools"
+import { isBotOwnerId } from "../../utils/command/is-owner-id"
 import { Command } from "../../interfaces/command"
 
 const embedStautsColor = {
@@ -10,7 +10,7 @@ const embedStautsColor = {
     dnd: "Red"
 }
 
-type IEmbedStatusColors = keyof typeof embedStautsColor
+type EmbedStatusColors = keyof typeof embedStautsColor
 
 const embedStautsEmoji = {
     idle: "🌙",
@@ -58,16 +58,18 @@ export const command: Command = {
     run: async (interaction) => {
         const client = interaction.client
 
-        if (!isBotOwerId(interaction.user.id)) {
-            return interaction.reply(
+        if (!isBotOwnerId(interaction.user.id)) {
+            interaction.reply(
                 `\`\`\`Permission Error:\n${interaction.user.username}, você não possui permissão para usar este comando.\`\`\``
             )
+
+            return
         }
 
         const botAvatarUrl = client.user.displayAvatarURL()
 
-        const newStatus = interaction.options.get("new-status")?.value as IEmbedStatusColors
-        const newDescription = interaction.options.get("new-description")?.value as IEmbedStatusColors
+        const newStatus = interaction.options.get("new-status")?.value as EmbedStatusColors
+        const newDescription = interaction.options.get("new-description")?.value as string
 
         const statusEmbed = new discord.EmbedBuilder()
             .setAuthor({ name: client.user.username, iconURL: botAvatarUrl })
