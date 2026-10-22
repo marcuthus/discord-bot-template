@@ -77,10 +77,10 @@ src/
 │   ├── commands/    # Comandos (Slash Commands)
 │   ├── events/      # Handlers de eventos do Discord
 │   ├── handlers/    # Carregadores automáticos
-│   └── helpers/     # Auxiliares de configuração
+│   ├── interfaces/  # Definições de tipos e interfaces
+│   └── utils/       # Utilitários do cliente
 ├── enums/           # Enums globais
-├── interfaces/      # Definições de tipos e interfaces
-└── utils/           # Utilitários (Logger, JSON parser, etc.)
+└── helpers/         # Auxiliares (config, logger)
 ```
 
 ## ⚖️ Licença

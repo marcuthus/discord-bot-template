@@ -1,4 +1,4 @@
-import { createScopedLogger } from "../../utils/logger"
+import { createScopedLogger } from "../../helpers/logger.helper"
 import { Event } from "../interfaces/event/index"
 import { Client } from "../index"
 

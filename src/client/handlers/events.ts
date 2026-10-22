@@ -1,7 +1,7 @@
 import path from "node:path"
 import fs from "node:fs"
 
-import { createScopedLogger } from "../../utils/logger"
+import { createScopedLogger } from "../../helpers/logger.helper"
 import { Event } from "../interfaces/event"
 import { Client } from "../index"
 

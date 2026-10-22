@@ -1,8 +1,8 @@
 import * as discord from "discord.js"
 
-import { createScopedLogger } from "../utils/logger"
+import { createScopedLogger } from "../helpers/logger.helper"
+import { configHelper } from "../helpers/config.helper"
 
-import { configHelper } from "./helpers/config.helper"
 import { Command } from "./interfaces/command/index"
 import handleCommands from "./handlers/commands"
 import handleEvents from "./handlers/events"

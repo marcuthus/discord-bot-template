@@ -1,5 +1,5 @@
+import { createScopedLogger } from "../../helpers/logger.helper"
 import { ExtendedInteraction } from "../interfaces/command"
-import { createScopedLogger } from "../../utils/logger"
 import { Event } from "../interfaces/event"
 import { Client } from "../index"
 

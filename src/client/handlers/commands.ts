@@ -3,7 +3,7 @@ import fs from "fs"
 
 import * as discord from "discord.js"
 
-import { createScopedLogger } from "../../utils/logger"
+import { createScopedLogger } from "../../helpers/logger.helper"
 import { Command } from "../interfaces/command/index"
 import { Client } from "../index"
 

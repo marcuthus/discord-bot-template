@@ -46,7 +46,7 @@ import fs from "node:fs"
 import * as discord from "discord.js"
 import winston from "winston"
 
-import { createScopedLogger } from "../../utils/logger"
+import { createScopedLogger } from "../../helpers/logger.helper"
 import { Command } from "../interfaces/command"
 import { Client } from "../index"
 ```
@@ -139,13 +139,13 @@ try {
 ### Configuration
 
 - Environment variables loaded via `@marcuth/env` package
-- Config helper at `src/client/helpers/config.helper.ts`
+- Config helper at `src/helpers/config.helper.ts`
 - Required env vars: `DISCORD_BOT_TOKEN`, `DISCORD_ADMIN_ID`, `DISCORD_APPLICATION_ID`, `DISCORD_PUBLIC_KEY`
 
 ### Logging
 
 - Use `winston` for logging with scoped loggers
-- Import: `import { createScopedLogger } from "../../utils/logger"`
+- Import: `import { createScopedLogger } from "../../helpers/logger.helper"`
 - Create scoped logger: `const logger = createScopedLogger("scope-name")`
 - Log levels: `logger.error()`, `logger.info()`, `logger.warn()`, `logger.debug()`
 - Logs output to console and files in `logs/` directory
