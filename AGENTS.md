@@ -88,7 +88,7 @@ export interface Command extends discord.ChatInputApplicationCommandData {
 ### Naming Conventions
 
 - **Files**: kebab-case (e.g., `ping.ts`, `interaction-create.ts`, `command.interface.ts`)
-- **Directories**: kebab-case (e.g., `client/`, `commands/`, `events/`)
+- **Directories**: kebab-case (e.g., `commands/`, `events/`, `handlers/`)
 - **Interfaces**: PascalCase with descriptive names (e.g., `Command`, `Event`, `ExtendedInteraction`)
 - **Types**: PascalCase (e.g., `RunFunc`)
 - **Enums**: PascalCase with singular form (e.g., `EventType`)
@@ -120,21 +120,21 @@ try {
 
 **Commands Structure:**
 
-- Place commands in `src/client/commands/<category>/<command-name>.ts`
+- Place commands in `src/commands/<category>/<command-name>.ts`
 - Export a `command` object with `name`, `description`, `type`, and `run` function
 - Use `discord.ApplicationCommandType.ChatInput` for slash commands
 
 **Events Structure:**
 
-- Place events in `src/client/events/<event-name>.ts`
+- Place events in `src/events/<event-name>.ts`
 - Export an `event` object with `name`, `type` (`"on"`, `"once"`, `"off"`), and `run` function
 - Event types defined in `src/enums/event-type.enum.ts`
 
 **Client Pattern:**
 
 - Use factory function `createClient()` instead of direct instantiation
-- Client class extends `discord.Client` with custom properties (`commands`, `slashCommands`)
-- Handlers in `src/client/handlers/` automatically load commands and events
+- Client class (`src/client.ts`) extends `discord.Client` with custom properties (`commands`, `slashCommands`)
+- Handlers in `src/handlers/` automatically load commands and events
 
 ### Configuration
 

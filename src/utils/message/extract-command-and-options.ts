@@ -1,4 +1,4 @@
-import { configHelper } from "../../../helpers/config.helper"
+import { configHelper } from "../../helpers/config.helper"
 
 export function extractCommandAndOptions(messageContent: string) {
     if (!messageContent) return { command: "", options: [] }

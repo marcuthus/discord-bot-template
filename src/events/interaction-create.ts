@@ -1,7 +1,7 @@
-import { createScopedLogger } from "../../helpers/logger.helper"
+import { createScopedLogger } from "../helpers/logger.helper"
 import { ExtendedInteraction } from "../interfaces/command"
 import { Event } from "../interfaces/event"
-import { Client } from "../index"
+import { Client } from "../client"
 
 const logger = createScopedLogger("client")
 

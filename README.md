@@ -73,14 +73,14 @@ Um template robusto e moderno para criação de bots de Discord utilizando **Typ
 
 ```text
 src/
-├── client/          # Lógica central do bot
-│   ├── commands/    # Comandos (Slash Commands)
-│   ├── events/      # Handlers de eventos do Discord
-│   ├── handlers/    # Carregadores automáticos
-│   ├── interfaces/  # Definições de tipos e interfaces
-│   └── utils/       # Utilitários do cliente
+├── client.ts        # Criação e ciclo de vida do cliente
+├── commands/        # Comandos (Slash Commands)
 ├── enums/           # Enums globais
-└── helpers/         # Auxiliares (config, logger)
+├── events/          # Handlers de eventos do Discord
+├── handlers/        # Carregadores automáticos
+├── helpers/         # Auxiliares (config, logger)
+├── interfaces/      # Definições de tipos e interfaces
+└── utils/           # Utilitários
 ```
 
 ## ⚖️ Licença
