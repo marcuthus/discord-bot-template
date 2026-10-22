@@ -1,6 +1,6 @@
 import * as discord from "discord.js"
 
-export interface ExtendedInteraction extends discord.CommandInteraction {
+export interface ExtendedInteraction extends discord.ChatInputCommandInteraction {
     member: discord.GuildMember
 }
 

@@ -4,7 +4,7 @@
 
 ### Development
 
-- `npm run dev` - Run bot in development mode with ts-node
+- `npm run dev` - Run bot in development mode with tsx
 - `npm run dev:reload` - Run with nodemon for auto-reload
 - `npm run build` - Compile TypeScript to JavaScript (outputs to `./dist/`)
 - `npm start` - Run compiled bot from `./dist/`
@@ -72,7 +72,7 @@ import { Client } from "../index"
 - Module system: CommonJS (`"module": "commonjs"`)
 - Always use explicit type annotations for function parameters and return types
 - Export interfaces and types for reusable structures
-- Use `ExtendedInteraction` for command interactions (extends `discord.CommandInteraction`)
+- Use `ExtendedInteraction` for command interactions (extends `discord.ChatInputCommandInteraction`)
 
 ```typescript
 // Example type definitions

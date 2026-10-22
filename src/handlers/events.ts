@@ -38,7 +38,8 @@ export default async (client: Client) => {
     }
 
     async function importEvent(eventFilePath: string) {
-        const event: Event = (await import(eventFilePath)).event
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const event: Event = require(eventFilePath).event
         return event
     }
 }
