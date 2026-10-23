@@ -83,6 +83,23 @@ src/
 └── utils/           # Utilitários
 ```
 
+## 💡 Comandos de exemplo
+
+| Comando                                     | Descrição                                                                 |
+| ------------------------------------------- | ------------------------------------------------------------------------- |
+| `/ping`                                     | Mostra a latência do bot.                                                 |
+| `/menu`                                     | Menu de comandos por categoria.                                           |
+| `/user-id [user]`                           | Seu ID ou o do usuário escolhido.                                         |
+| `/server-id`                                | ID do servidor e do canal atuais.                                         |
+| `/members [limit]`                          | Lista os membros do servidor com seus IDs.                                |
+| `/ban-member <user> [reason]`               | Bane um membro (requer permissão de banir).                               |
+| `/invite [max-age-hours] [max-uses]`        | Cria um link de convite para o servidor.                                  |
+| `/leave`                                    | O bot sai do servidor (requer gerenciar servidor).                        |
+| `/create-sticker <image> <name> [tags] [crop] [center]` | Cria uma figurinha do servidor. `crop`: `true` (padrão), `false` ou `dented`; `center`: padrão sim. |
+| `/set-status`                               | Define o status do bot (apenas dono).                                     |
+
+> Os comandos de moderação usam `defaultMemberPermissions`, então o Discord já os esconde de quem não tem a permissão. O `/members` usa a **Server Members Intent**, que é privilegiada: ative-a em _Developer Portal → Bot → Privileged Gateway Intents_ (assim como a Message Content Intent), senão o bot não consegue fazer login. Bots do Discord não podem adicionar usuários a um servidor nem criar servidores, por isso não há `add-member` nem `create-group`.
+
 ## 🐳 Docker
 
 O projeto inclui um `Dockerfile` (multi-stage, executa como usuário sem privilégios) e um `docker-compose.yml`. As variáveis são lidas do arquivo `.env` (copie o `.env.example`); o `.env` nunca entra na imagem.

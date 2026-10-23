@@ -156,3 +156,11 @@ try {
 - `docker-compose.yml` loads `.env` through `env_file` and keeps `logs/` in named volumes.
 - `.dockerignore` keeps `.env`, `logs/`, `auth/`, `.git` and build output out of the image. Never copy secrets into the image.
 - Build and run: `docker compose up --build`.
+
+## Server Management Commands
+
+- Command names are kebab-case; the folder (`info`, `group`, `media`, `admin`) is the menu category (`client.commandCategories`).
+- Moderation commands set `defaultMemberPermissions` (and `dmPermission: false`) on the command data and also check `interaction.memberPermissions` (or the bot owner) at runtime.
+- `interactionCreate` awaits `command.run`, so errors thrown by a command reach the generic error reply.
+- `/members` needs the privileged Server Members Intent (`GuildMembers`); it must be enabled in the Developer Portal.
+- Bots cannot add users to a server or create servers, so there are no `add-member`/`create-group` commands.

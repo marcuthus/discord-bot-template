@@ -39,10 +39,13 @@ export default async (client: Client) => {
                 name: command.name,
                 description: command.description,
                 type: command.type,
-                options: command.options
+                options: command.options,
+                defaultMemberPermissions: command.defaultMemberPermissions,
+                dmPermission: command.dmPermission
             }
 
             client.commands.set(command.name, command)
+            client.commandCategories.set(command.name, dir)
             client.slashCommands.push(commandData)
 
             logger.info(`The command '${command.name}' loaded.`)

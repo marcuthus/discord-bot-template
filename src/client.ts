@@ -11,6 +11,7 @@ const logger = createScopedLogger("client")
 export class Client extends discord.Client {
     public commands: discord.Collection<string, Command> = new discord.Collection()
     public slashCommands: discord.ApplicationCommandDataResolvable[] = []
+    public commandCategories: Map<string, string> = new Map()
 }
 
 function createClient() {
@@ -19,6 +20,7 @@ function createClient() {
     const client = new Client({
         intents: [
             discord.GatewayIntentBits.Guilds,
+            discord.GatewayIntentBits.GuildMembers,
             discord.GatewayIntentBits.DirectMessages,
             discord.GatewayIntentBits.MessageContent,
             discord.GatewayIntentBits.GuildMessages,

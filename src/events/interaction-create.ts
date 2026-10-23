@@ -20,13 +20,17 @@ export const event: Event = {
 
             try {
                 logger.info(`Running the command '${interaction.commandName}'.`)
-                command.run(interaction)
+                await command.run(interaction)
             } catch (error) {
                 logger.error(error)
 
-                await interaction.reply({
-                    content: `Ocorreu um erro ao tentar extecutar o comando \`${command.name}\`!`
-                })
+                const content = `Ocorreu um erro ao tentar executar o comando \`${command.name}\`!`
+
+                if (interaction.deferred || interaction.replied) {
+                    await interaction.followUp({ content })
+                } else {
+                    await interaction.reply({ content })
+                }
             }
         }
     }
