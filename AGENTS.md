@@ -149,3 +149,10 @@ try {
 - Create scoped logger: `const logger = createScopedLogger("scope-name")`
 - Log levels: `logger.error()`, `logger.info()`, `logger.warn()`, `logger.debug()`
 - Logs output to console and files in `logs/` directory
+
+## Docker
+
+- `Dockerfile` is multi-stage (build with `npm ci` + `npm run build`, runtime with production dependencies only) and runs as an unprivileged user.
+- `docker-compose.yml` loads `.env` through `env_file` and keeps `logs/` in named volumes.
+- `.dockerignore` keeps `.env`, `logs/`, `auth/`, `.git` and build output out of the image. Never copy secrets into the image.
+- Build and run: `docker compose up --build`.

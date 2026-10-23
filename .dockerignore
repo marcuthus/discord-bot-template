@@ -1,0 +1,11 @@
+.git
+.github
+.vscode
+.env
+logs
+auth
+node_modules
+dist
+Dockerfile
+docker-compose.yml
+*.md
