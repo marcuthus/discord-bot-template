@@ -44,8 +44,31 @@ export const command: Command = {
             return
         }
 
+        // O bot bane com as próprias permissões, então é preciso checar a hierarquia do invocador:
+        // sem isso, um moderador com "Banir membros" conseguiria banir quem tem cargo acima do dele.
+        const guild = interaction.guild!
+        const targetMember = await guild.members.fetch(user.id).catch(() => null)
+
+        if (user.id === guild.ownerId || user.id === interaction.client.user.id) {
+            await interaction.reply({ content: "Este usuário não pode ser banido.", ephemeral: true })
+            return
+        }
+
+        if (
+            targetMember &&
+            !isBotOwnerId(interaction.user.id) &&
+            interaction.user.id !== guild.ownerId &&
+            targetMember.roles.highest.comparePositionTo(interaction.member.roles.highest) >= 0
+        ) {
+            await interaction.reply({
+                content: "Você não pode banir um membro com cargo igual ou superior ao seu.",
+                ephemeral: true
+            })
+            return
+        }
+
         try {
-            await interaction.guild!.members.ban(user, { reason })
+            await guild.members.ban(user, { reason })
             await interaction.reply({
                 content: `**${user.username}** (\`${user.id}\`) foi banido.${reason ? ` Motivo: ${reason}` : ""}`,
                 allowedMentions: { parse: [] }

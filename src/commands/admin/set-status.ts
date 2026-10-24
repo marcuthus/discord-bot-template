@@ -55,13 +55,18 @@ export const command: Command = {
         }
     ],
     type: discord.ApplicationCommandType.ChatInput,
+    // Comando só do dono: escondido de membros comuns e indisponível em DM
+    dmPermission: false,
+    defaultMemberPermissions: discord.PermissionFlagsBits.Administrator,
     run: async (interaction) => {
         const client = interaction.client
 
         if (!isBotOwnerId(interaction.user.id)) {
-            interaction.reply(
-                `\`\`\`Permission Error:\n${interaction.user.username}, você não possui permissão para usar este comando.\`\`\``
-            )
+            await interaction.reply({
+                content: `\`\`\`Permission Error:
+${interaction.user.username}, você não possui permissão para usar este comando.\`\`\``,
+                ephemeral: true
+            })
 
             return
         }
@@ -85,11 +90,11 @@ export const command: Command = {
             )
             .setColor(embedStautsColor[newStatus] as discord.ColorResolvable)
 
-        interaction.reply({ embeds: [statusEmbed], ephemeral: true })
+        await interaction.reply({ embeds: [statusEmbed], ephemeral: true })
 
-        client.user.setStatus(newStatus)
-
+        // Uma única chamada: setStatus + setPresence separados faziam o segundo sobrescrever o primeiro
         client.user.setPresence({
+            status: newStatus as discord.PresenceStatusData,
             activities: [{ name: newDescription }]
         })
     }
